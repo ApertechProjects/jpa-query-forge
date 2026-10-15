@@ -1,0 +1,7 @@
+JPA Query Forge
+Copyright 2026 Apertech
+
+This product is derived from spring-data-dynamic-query
+(https://github.com/tdilber/spring-data-dynamic-query), licensed under the Apache License, Version 2.0.
+The original sources were modified: packages and public types were renamed, the repository wiring was
+reworked, and Hibernate-internal API usage was replaced with standard JPA APIs.
