@@ -18,19 +18,17 @@ Java 17+. Only standard JPA APIs are used (no Hibernate internals).
 
 ## Installation
 
-Not published yet — install locally and add the dependency:
-
-```bash
-mvn install
-```
+Available on Maven Central:
 
 ```xml
 <dependency>
     <groupId>io.github.apertechprojects</groupId>
     <artifactId>jpa-query-forge</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
+
+Gradle: `implementation("io.github.apertechprojects:jpa-query-forge:1.0.0")`
 
 With Spring Boot nothing else is required: auto-configuration registers everything.
 `@EnableQueryForge` is available for explicit setups; unlike `@EnableJpaRepositories` it never changes
@@ -121,10 +119,6 @@ customerRepository.consumePartially(criteria, batch -> process(batch), 500);
   Declare a bean (typically extending `DefaultValueDeserializer`) to support more formats.
 - **EntityManager** — the shared `EntityManager` of the primary `EntityManagerFactory` is used. Declare
   an `EntityManagerProvider` bean to change it.
-
-## Migrating from spring-(data-)jpa-dynamic-query
-
-See [docs/MIGRATION.md](docs/MIGRATION.md). A script rewrites imports and the Maven dependency.
 
 ## Acknowledgements
 

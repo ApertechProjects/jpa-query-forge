@@ -1,10 +1,10 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 1.0.0 (2026-10-15)
 
 Initial release, derived from spring-data-dynamic-query (`sb3-v0.4.0` / `0.8.0` JPA behaviour).
 
-- Packages moved to `io.github.apertechprojects.queryforge`; branded types renamed (see docs/MIGRATION.md).
+- Packages moved to `io.github.apertechprojects.queryforge`; branded types renamed.
 - Spring Boot 3.0–4.1 support from a single artifact; standard JPA APIs only (no Hibernate internals).
 - Repository operations are interface default methods: no repository base class, factory bean or
   `@EnableJpaRepositories` override required. Spring Boot auto-configuration included.
