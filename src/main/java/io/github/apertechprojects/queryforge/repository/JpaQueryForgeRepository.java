@@ -22,7 +22,7 @@ import java.util.List;
  * All operations are default methods, so no custom repository base class or factory bean is required.
  */
 @NoRepositoryBean
-public interface ForgeRepository<T, ID> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T> {
+public interface JpaQueryForgeRepository<T, ID> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T> {
 
     default List<T> findAll(List<Criteria> criteriaList) {
         return ForgeQueryExecutor.findAll(this, criteriaList, QueryForgeContext.repositoryContext());

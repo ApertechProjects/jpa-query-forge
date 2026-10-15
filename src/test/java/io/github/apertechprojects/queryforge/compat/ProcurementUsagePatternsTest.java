@@ -14,7 +14,7 @@ import io.github.apertechprojects.queryforge.query.ForgeQuery;
 import io.github.apertechprojects.queryforge.query.builder.DistinctWhereOrderByPage;
 import io.github.apertechprojects.queryforge.query.builder.OrderByPage;
 import io.github.apertechprojects.queryforge.query.builder.PageableResult;
-import io.github.apertechprojects.queryforge.repository.ForgeRepository;
+import io.github.apertechprojects.queryforge.repository.JpaQueryForgeRepository;
 import io.github.apertechprojects.queryforge.testenv.entity.Customer;
 import io.github.apertechprojects.queryforge.testenv.entity.User;
 import org.junit.jupiter.api.Test;
@@ -190,7 +190,7 @@ class ProcurementUsagePatternsTest extends BaseTestInstance {
 
         List<Long> bySpecification = new ArrayList<>();
         // the first page must be filtered too (upstream applied the specification only from the second page on)
-        Specification<Customer> specification = ForgeRepository.createSpecification(List.of(Field("age").greaterThanOrEqual(23)));
+        Specification<Customer> specification = JpaQueryForgeRepository.createSpecification(List.of(Field("age").greaterThanOrEqual(23)));
         customerRepository.consumePartially(specification, list -> list.forEach(c -> bySpecification.add(c.getId())), 2);
         assertEquals(List.of(customer4.getId(), customer5.getId(), customer6.getId(), customer7.getId(), customer8.getId()),
                 bySpecification.stream().sorted().toList());

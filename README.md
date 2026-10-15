@@ -2,7 +2,7 @@
 
 Dynamic, criteria-based querying for Spring Data JPA repositories.
 
-Extend `ForgeRepository` and build queries at runtime — filters, `AND`/`OR` groups, joins, `SELECT`
+Extend `JpaQueryForgeRepository` and build queries at runtime — filters, `AND`/`OR` groups, joins, `SELECT`
 projections into DTOs, `DISTINCT`, `ORDER BY` and paging — without writing a query method or a
 `Specification` per use case. Everything is translated to the JPA Criteria API, so it is as safe and
 as fast as Spring Data JPA itself.
@@ -37,7 +37,7 @@ repository scanning, so it can live on any configuration class.
 ## Quick start
 
 ```java
-public interface CustomerRepository extends ForgeRepository<Customer, Long> {
+public interface CustomerRepository extends JpaQueryForgeRepository<Customer, Long> {
 }
 ```
 

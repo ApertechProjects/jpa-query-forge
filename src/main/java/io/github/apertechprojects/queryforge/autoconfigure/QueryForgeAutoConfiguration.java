@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Registers the {@link QueryForgeContext}. Repositories need no extra configuration:
- * extending {@code ForgeRepository} is enough.
+ * extending {@code JpaQueryForgeRepository} is enough.
  */
 @AutoConfiguration
 @ConditionalOnClass({EntityManager.class, JpaRepository.class})

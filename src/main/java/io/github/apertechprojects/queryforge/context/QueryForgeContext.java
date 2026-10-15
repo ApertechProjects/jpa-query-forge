@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.orm.jpa.SharedEntityManagerCreator;
 
 /**
- * Bridges Spring beans to {@code ForgeRepository} default methods, which have no access to injection.
+ * Bridges Spring beans to {@code JpaQueryForgeRepository} default methods, which have no access to injection.
  * <p>
  * Collaborators are resolved lazily on first use, so user-defined {@link ValueDeserializer} and
  * {@link EntityManagerProvider} beans always win regardless of configuration ordering.

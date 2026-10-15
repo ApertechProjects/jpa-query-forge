@@ -2,7 +2,7 @@ package io.github.apertechprojects.queryforge.query;
 
 import io.github.apertechprojects.queryforge.criteria.Criteria;
 import io.github.apertechprojects.queryforge.query.builder.*;
-import io.github.apertechprojects.queryforge.repository.ForgeRepository;
+import io.github.apertechprojects.queryforge.repository.JpaQueryForgeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.util.Pair;
 
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ForgeQueryBuilder<T, ID> implements DistinctWhereOrderByPage<T, ID>, WhereOrderByPage<T, ID>, OrderByPage<T, ID>, PageableResult<T, ID>, Result<T, ID> {
-    protected final ForgeRepository<T, ID> repository;
+    protected final JpaQueryForgeRepository<T, ID> repository;
     protected final ForgeQuery forgeQuery;
 
-    public ForgeQueryBuilder(ForgeRepository<T, ID> repository) {
+    public ForgeQueryBuilder(JpaQueryForgeRepository<T, ID> repository) {
         this.repository = repository;
         forgeQuery = new ForgeQuery();
     }
