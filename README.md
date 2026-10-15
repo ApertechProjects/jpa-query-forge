@@ -1,5 +1,13 @@
 # JPA Query Forge
 
+## Acknowledgements
+
+JPA Query Forge started as a fork of
+[spring-data-dynamic-query](https://github.com/tdilber/spring-data-dynamic-query). Many thanks to its
+author and contributors for the original design and implementation.
+
+## About
+
 Dynamic, criteria-based querying for Spring Data JPA repositories.
 
 Extend `JpaQueryForgeRepository` and build queries at runtime — filters, `AND`/`OR` groups, joins, `SELECT`
@@ -119,12 +127,6 @@ customerRepository.consumePartially(criteria, batch -> process(batch), 500);
   Declare a bean (typically extending `DefaultValueDeserializer`) to support more formats.
 - **EntityManager** — the shared `EntityManager` of the primary `EntityManagerFactory` is used. Declare
   an `EntityManagerProvider` bean to change it.
-
-## Acknowledgements
-
-JPA Query Forge started as a fork of
-[spring-data-dynamic-query](https://github.com/tdilber/spring-data-dynamic-query). Many thanks to its
-author and contributors for the original design and implementation.
 
 ## License
 
