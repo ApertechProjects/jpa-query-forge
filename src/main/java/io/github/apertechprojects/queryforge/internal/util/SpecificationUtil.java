@@ -15,7 +15,7 @@ public class SpecificationUtil {
 
     public static String toLowerCaseFirstLetter(String string) {
         if (string.length() <= 1) {
-            throw new RuntimeException("String don't have available length!!");
+            throw new RuntimeException("String does not have the required length");
         }
         return Character.toLowerCase(string.charAt(0)) + string.substring(1);
     }

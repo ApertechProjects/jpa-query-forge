@@ -201,7 +201,7 @@ public class ForgeQueryExecutor {
                 }
             } else {
                 if (resultTypeClass.isRecord()) {
-                    throw new QueryForgeIllegalArgumentException("Record didnt support nested model type: " + declaredField.getType().getName());
+                    throw new QueryForgeIllegalArgumentException("Records do not support nested model type: " + declaredField.getType().getName());
                 }
             }
         }
