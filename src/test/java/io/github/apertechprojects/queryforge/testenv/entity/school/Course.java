@@ -1,6 +1,5 @@
 package io.github.apertechprojects.queryforge.testenv.entity.school;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -40,7 +39,6 @@ public class Course {
         return new Course(null, name, null, null, null, description);
     }
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     private Set<Student> students;
 

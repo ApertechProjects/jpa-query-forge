@@ -2,6 +2,7 @@ package io.github.apertechprojects.queryforge.testenv.repository;
 
 import io.github.apertechprojects.queryforge.repository.JpaQueryForgeRepository;
 import io.github.apertechprojects.queryforge.testenv.entity.authorization.Role;
+import io.github.apertechprojects.queryforge.testenv.entity.authorization.QRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<Role, Long>, JpaQueryForgeRepository<Role, Long> {}
+public interface RoleRepository extends JpaRepository<Role, Long>, JpaQueryForgeRepository<Role, Long, QRole> {}

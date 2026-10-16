@@ -1,7 +1,6 @@
 // RoleAuthorization.java
 package io.github.apertechprojects.queryforge.testenv.entity.authorization;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import org.hibernate.annotations.Fetch;
@@ -16,7 +15,6 @@ public class RoleAuthorization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

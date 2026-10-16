@@ -1,8 +1,5 @@
 package io.github.apertechprojects.queryforge.context;
 
-import io.github.apertechprojects.queryforge.deserializer.DefaultValueDeserializer;
-import io.github.apertechprojects.queryforge.deserializer.ValueDeserializer;
-import io.github.apertechprojects.queryforge.internal.RepositoryContext;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -14,8 +11,8 @@ import org.springframework.orm.jpa.SharedEntityManagerCreator;
 /**
  * Bridges Spring beans to {@code JpaQueryForgeRepository} default methods, which have no access to injection.
  * <p>
- * Collaborators are resolved lazily on first use, so user-defined {@link ValueDeserializer} and
- * {@link EntityManagerProvider} beans always win regardless of configuration ordering.
+ * The {@link EntityManagerProvider} is resolved lazily on first use, so a user-defined bean always wins
+ * regardless of configuration ordering.
  */
 public class QueryForgeContext implements ApplicationContextAware, DisposableBean {
 
@@ -23,7 +20,6 @@ public class QueryForgeContext implements ApplicationContextAware, DisposableBea
 
     private ApplicationContext applicationContext;
     private volatile EntityManagerProvider entityManagerProvider;
-    private volatile ValueDeserializer deserializer;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
@@ -38,13 +34,14 @@ public class QueryForgeContext implements ApplicationContextAware, DisposableBea
         }
     }
 
-    public static RepositoryContext repositoryContext() {
+    /** Entity manager of the active context. */
+    public static EntityManager entityManager() {
         QueryForgeContext context = current;
         if (context == null) {
             throw new IllegalStateException("jpa-query-forge is not initialized: no QueryForgeContext bean found. "
                     + "Make sure Spring Boot auto-configuration is enabled or add @EnableQueryForge to a configuration class.");
         }
-        return new RepositoryContext(context.getEntityManager(), context.getDeserializer());
+        return context.getEntityManager();
     }
 
     public EntityManager getEntityManager() {
@@ -55,15 +52,6 @@ public class QueryForgeContext implements ApplicationContextAware, DisposableBea
             entityManagerProvider = provider;
         }
         return provider.provide();
-    }
-
-    public ValueDeserializer getDeserializer() {
-        ValueDeserializer result = deserializer;
-        if (result == null) {
-            result = applicationContext.getBeanProvider(ValueDeserializer.class).getIfAvailable(DefaultValueDeserializer::new);
-            deserializer = result;
-        }
-        return result;
     }
 
     private EntityManagerProvider sharedEntityManagerProvider() {

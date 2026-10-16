@@ -6,11 +6,11 @@
 
     <groupId>io.github.apertechprojects</groupId>
     <artifactId>jpa-query-forge</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <name>JPA Query Forge</name>
-    <description>Dynamic, criteria-based querying for Spring Data JPA repositories (Spring Boot 3+).</description>
+    <description>EF Core style, type-safe lambda queries for Spring Data JPA repositories (Spring Boot 4).</description>
     <url>https://github.com/ApertechProjects/jpa-query-forge</url>
 
     <licenses>
@@ -35,10 +35,10 @@
     </scm>
 
     <properties>
-        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Override with -Dspring-boot.version=4.x.y to verify against newer Boot lines -->
-        <spring-boot.version>3.5.16</spring-boot.version>
+        <!-- Override with -Dspring-boot.version=4.x.y to verify against other Boot 4 lines -->
+        <spring-boot.version>4.1.1</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -66,17 +66,6 @@
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <!-- Web argument resolvers (only active with @EnableQueryForgeWebArgumentResolvers) -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <optional>true</optional>
-        </dependency>
 
         <!-- TEST -->
         <dependency>
@@ -86,28 +75,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Jackson 2 is explicit because Spring Boot 4 defaults to Jackson 3 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -126,6 +94,24 @@
                 <configuration>
                     <parameters>true</parameters>
                 </configuration>
+                <executions>
+                    <!-- the processor is registered as a service of this jar, so it can not run on its own build -->
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <proc>none</proc>
+                        </configuration>
+                    </execution>
+                    <!-- generates query models (QCustomer, ...) for the test entities -->
+                    <execution>
+                        <id>default-testCompile</id>
+                        <configuration>
+                            <annotationProcessors>
+                                <annotationProcessor>io.github.apertechprojects.queryforge.processor.QueryForgeModelProcessor</annotationProcessor>
+                            </annotationProcessors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -135,7 +121,6 @@
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
-                        <include>**/presentation/S*.java</include>
                     </includes>
                 </configuration>
             </plugin>

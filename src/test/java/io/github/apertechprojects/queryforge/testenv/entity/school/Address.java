@@ -1,6 +1,5 @@
 package io.github.apertechprojects.queryforge.testenv.entity.school;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -28,7 +27,6 @@ public class Address {
         this.zip = zip;
     }
 
-    @JsonIgnore
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Student student;
 

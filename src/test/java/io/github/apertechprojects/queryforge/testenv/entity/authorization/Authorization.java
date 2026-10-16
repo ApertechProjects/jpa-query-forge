@@ -1,6 +1,5 @@
 package io.github.apertechprojects.queryforge.testenv.entity.authorization;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +22,6 @@ public class Authorization {
     @Column(name = "menu_icon")
     private String menuIcon;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "authorization", fetch = FetchType.LAZY)
     Set<RoleAuthorization> roleAuthorizations;
 

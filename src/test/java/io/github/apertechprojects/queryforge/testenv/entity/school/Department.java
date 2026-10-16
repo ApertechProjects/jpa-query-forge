@@ -1,6 +1,5 @@
 package io.github.apertechprojects.queryforge.testenv.entity.school;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -23,7 +22,6 @@ public class Department {
         this.name = name;
     }
 
-    @JsonIgnore
     @OneToMany(mappedBy="department", fetch = FetchType.EAGER)
     private Set<Student> students;
 
